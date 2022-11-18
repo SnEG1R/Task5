@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using Task5.Application.Interfaces;
 using Task5.Domain;
 
 namespace Task5.Persistence.Contexts;
 
-public sealed class ApplicationDbContext : DbContext
+public sealed class ApplicationDbContext : DbContext, IApplicationDbContext
 {
     public DbSet<Address> Addresses { get; set; }
     public DbSet<City> Cities { get; set; }
