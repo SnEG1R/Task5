@@ -1,0 +1,61 @@
+body {
+    background-color: #6d6f6f;
+}
+
+.header {
+    margin-bottom: 10px;
+}
+
+.table-container {
+    height: 80vh;
+    overflow-x: hidden;
+}
+
+.table {
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.table-fixed thead {
+    width: 97%;
+}
+
+.table-fixed tbody {
+    height: 230px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+    display: block;
+}
+
+.table-fixed tbody td, .table-fixed thead > tr > th {
+    float: left;
+    border-bottom-width: 0;
+}
+
+.form-select {
+    width: auto !important;
+    height: auto !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.block-region, .block-range {
+    margin-right: 50px;
+    height: 100%;
+}
+
+#input-customRange3, #input-seed {
+    border-radius: 3px;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+input[type=number] {
+    width: 150px;
+}
