@@ -2,7 +2,7 @@
 
 namespace Task5.Web.Controllers;
 
-public class HomeController : Controller
+public class UserGeneratorController : Controller
 {
     public IActionResult Index()
     {

@@ -1,0 +1,57 @@
+﻿<link rel="stylesheet" href="css/user-generator/user-generator.css">
+
+<div class="text-light">
+    <div class="header bg-dark w-100 d-flex justify-content-center align-items-center" style="height: 120px">
+        <div class="block-region d-flex justify-content-center align-items-center flex-column">
+            <span>Region</span>
+            <select class="form-select">
+                <option value="1">EN</option>
+                <option value="2">UK</option>
+                <option value="3">PL</option>
+            </select>
+        </div>
+        <div class="block-range d-flex justify-content-center align-items-center flex-column">
+            <label for="customRange3" class="form-label">
+                <span>Range error</span>
+            </label>
+            <input type="range" class="form-range" min="0" max="10" step="0.5" id="customRange3">
+            <input type="number" min="0" max="1000" value="0" id="input-customRange3">
+        </div>
+        <div class="block-range d-flex justify-content-center align-items-center flex-column">
+            <span>Seed</span>
+            <input type="number" min="0" max="1000" value="0" id="input-seed">
+            <button type="button" class="btn btn-danger mt-2">Danger</button>
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="table table-dark table-striped">
+            <thead>
+            <tr>
+                <th>Номер</th>
+                <th>Случайный идентификатор</th>
+                <th>ФИО</th>
+                <th>Адрес</th>
+                <th>Телефон</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+                <td>awd awd sfes rhdtg arshtdthgr thdgykiujt gfeagshtrrdxfg sthrbzfzvtsh</td>
+                <td>john@example.com</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+let slider = document.getElementById('customRange3');
+let input = document.getElementById('input-customRange3');
+
+slider.addEventListener('change', () => {
+    input.value = slider.value;
+});
+</script>
