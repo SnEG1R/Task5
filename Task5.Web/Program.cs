@@ -1,3 +1,4 @@
+using System.Net;
 using Task5.Application;
 using Task5.Persistence;
 
@@ -10,6 +11,15 @@ builder.Services.AddControllersWithViews()
 
 builder.Services.AddApplication();
 builder.Services.AddPersistence(configuration);
+
+builder.WebHost.ConfigureKestrel(config =>
+{
+    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+    {
+        config.Listen(IPAddress.Any, Convert.ToInt32(
+            Environment.GetEnvironmentVariable("PORT")));
+    }
+});
 
 var app = builder.Build();
 
