@@ -12,4 +12,12 @@ public static class LanguageLocalizer
             { "uk", "д." },
             { "pl", "ul." }
         };
+
+    public static readonly Dictionary<string, string> PhoneCode
+        = new()
+        {
+            { "en", "+44" },
+            { "uk", "+380" },
+            { "pl", "+48" }
+        };
 }

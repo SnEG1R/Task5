@@ -1,5 +1,6 @@
 using Bogus;
 using MediatR;
+using Task5.Application.Common.Constants;
 using Task5.Application.Common.Generators;
 using Task5.Application.Common.Generators.Interfaces;
 using Task5.Application.Interfaces;
@@ -11,7 +12,8 @@ public class GetListPersonDataQueryHandler :
 {
     private Faker _faker = null!;
     private IPersonDataGenerator _personDataGenerator = null!;
-    private IApplicationVillageDbContext _villageDbContext;
+    private IErrorGenerator _errorGenerator = null!;
+    private readonly IApplicationVillageDbContext _villageDbContext;
 
     public GetListPersonDataQueryHandler(IApplicationVillageDbContext villageDbContext)
     {
@@ -24,29 +26,32 @@ public class GetListPersonDataQueryHandler :
         var listPerson = new List<PersonDto>();
         _faker = new Faker(request.Region);
 
-        for (var seed = request.Seed; seed < request.Seed + 20; seed++)
+        for (var seed = request.Seed; seed < request.Seed + request.CountLoadRecord; seed++)
         {
-            listPerson.Add(await CreateUser(seed));
+            listPerson.Add(await CreateUser(seed, request.ErrorValue));
         }
 
         return new GetListPersonDataVm() { PersonDataDtos = listPerson };
     }
 
-    private Task<PersonDto> CreateUser(int seed)
+    private Task<PersonDto> CreateUser(int seed, double errorValue)
     {
         _faker.Random = new Randomizer(seed);
         _personDataGenerator = new PersonDataGenerator(_villageDbContext, _faker.Locale, seed);
-        
-        var firstName = _personDataGenerator.GenerateFullName();
+        _errorGenerator = new ErrorGenerator(_faker.Locale, seed, errorValue);
+
+        var fullName = _personDataGenerator.GenerateFullName();
         var address = _personDataGenerator.GenerateAddress();
-        
-        var phoneNumber = _faker.Phone.PhoneNumber();
+        var phoneNumber = _personDataGenerator.GeneratePhoneNumber();
+
+        var lines = _errorGenerator
+            .GenerateError(fullName, address, phoneNumber);
 
         var person = new PersonDto()
         {
-            FullName = $"{firstName}",
-            PhoneNumber = phoneNumber,
-            Address = address
+            FullName = lines[0],
+            Address = lines[1],
+            PhoneNumber = lines[2]
         };
 
         return Task.FromResult(person);

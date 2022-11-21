@@ -6,4 +6,5 @@ public interface IPersonDataGenerator
 {
     string GenerateFullName();
     string GenerateAddress();
+    string GeneratePhoneNumber();
 }
