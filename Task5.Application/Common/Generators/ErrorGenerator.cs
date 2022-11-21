@@ -17,7 +17,7 @@ public class ErrorGenerator : IErrorGenerator
         _random = new Random(seed);
     }
 
-    public string[] GenerateError(params string[] lines)
+    public (string, string, string) GenerateError(params string[] lines)
     {
         var (countError, probability) = GetCountErrorAndProbability();
         int changeLineIndex;
@@ -38,7 +38,7 @@ public class ErrorGenerator : IErrorGenerator
             lines[changeLineIndex] = operation(lines[changeLineIndex]);
         }
 
-        return lines;
+        return new ValueTuple<string, string, string>(lines[0], lines[1], lines[2]);
     }
 
     private string RemoveRandomChar(string line)

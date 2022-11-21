@@ -8,12 +8,8 @@ let select = document.querySelector('.form-select');
 let inputErrorValue = document.getElementById('input-error-value');
 
 window.onload = async function () {
-    await GetPersonData(false, 20);
+    await GetPersonData(true, 20);
 }
-
-tableContainer.addEventListener('scroll', async () => {
-    await checkPosition();
-});
 
 async function GetPersonData(reset = false, countLoadRecord = 10) {
     let response = await sendData(countLoadRecord);
@@ -31,15 +27,13 @@ async function checkPosition() {
     const screenHeight = tableContainer.offsetHeight;
 
     const scrolled = tableContainer.scrollTop;
-    const threshold = height - screenHeight / 20
+    const threshold = height - screenHeight / 20;
     const position = scrolled + screenHeight;
 
     if (position >= threshold && counter !== counterLoad) {
         counterLoad = counter;
         
         await GetPersonData();
-
-        counterLoad = counter;
     }
 }
 
