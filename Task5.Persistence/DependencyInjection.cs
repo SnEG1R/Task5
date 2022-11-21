@@ -11,12 +11,13 @@ public static class DependencyInjection
     public static IServiceCollection AddPersistence(this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddDbContext<ApplicationDbContext>(options =>
+        services.AddDbContext<ApplicationVillageVillageDbContext>(options =>
         {
             options.UseNpgsql(configuration["ConnectionStrings:DefaultConnectionDevelop"]);
         });
 
-        services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+        services.AddScoped<IApplicationVillageDbContext, ApplicationVillageVillageDbContext>();
+        services.AddScoped<DbContext, ApplicationVillageVillageDbContext>();
 
         return services;
     }
