@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Task5.Application.CQs.User.Queries.GetListPersonData;
+using Task5.Web.Models;
 
 namespace Task5.Web.Controllers;
 
@@ -19,12 +20,14 @@ public class UserGeneratorController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Index(string region, [FromBody] int seed)
+    public async Task<IActionResult> Index(string region, [FromBody] InformationData data)
     {
         var query = new GetListPersonDataQuery()
         {
             Region = region,
-            Seed = seed
+            Seed = data.Seed,
+            ErrorValue = data.ErrorValue,
+            CountLoadRecord = data.CountLoadRecord
         };
         var getListPersonDataVm = await _mediator.Send(query);
 

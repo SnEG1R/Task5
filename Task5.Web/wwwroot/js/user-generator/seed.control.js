@@ -2,12 +2,11 @@ let generateSeedBtn = document.querySelector('.generate-seed');
 
 generateSeedBtn.addEventListener('click',  async () => {
     seedGenerate();
-    await GetPersonData(true);
+    await GetPersonData(true, 20);
 });
 
 seedInput.addEventListener('change',  async () => {
-    seedInput.value = seedInput.value - 20;
-    await GetPersonData(true);
+    await GetPersonData(true, 20);
 });
 
 function seedGenerate() {

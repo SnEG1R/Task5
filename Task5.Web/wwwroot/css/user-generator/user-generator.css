@@ -1,13 +1,9 @@
-body {
-    background-color: #6d6f6f;
-}
-
 .header {
     margin-bottom: 10px;
 }
 
 .table-container {
-    height: 80vh;
+    height: 70vh;
     overflow-x: hidden;
 }
 
@@ -39,21 +35,16 @@ body {
 .form-select {
     width: auto !important;
     height: auto !important;
-    border: none !important;
-    box-shadow: none !important;
-    outline: none !important;
 }
 
 .block-region, .block-range {
     margin-right: 50px;
-    height: 100%;
 }
 
 #input-customRange3, #input-seed {
     border-radius: 3px;
-    border: none !important;
-    box-shadow: none !important;
-    outline: none !important;
+    outline: none;
+    border: 1px solid black;
 }
 
 input[type=number] {

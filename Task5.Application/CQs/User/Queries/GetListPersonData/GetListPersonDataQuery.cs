@@ -6,4 +6,6 @@ public class GetListPersonDataQuery : IRequest<GetListPersonDataVm>
 {
     public string Region { get; set; }
     public int Seed { get; set; }
+    public double ErrorValue { get; set; }
+    public int CountLoadRecord { get; set; }
 }

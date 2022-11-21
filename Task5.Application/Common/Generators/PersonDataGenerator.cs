@@ -12,7 +12,6 @@ public class PersonDataGenerator : IPersonDataGenerator
     private readonly IApplicationVillageDbContext _villageDbContext;
     private readonly Faker _faker;
     private readonly Random _random;
-    private readonly int _seed;
     private readonly string _region;
 
     public PersonDataGenerator(IApplicationVillageDbContext villageDbContext,
@@ -22,10 +21,9 @@ public class PersonDataGenerator : IPersonDataGenerator
         {
             Random = new Randomizer(seed)
         };
-        _random = new Random();
-        _region = region;
-        _seed = seed;
         _villageDbContext = villageDbContext;
+        _random = new Random(seed);
+        _region = region;
     }
 
     public string GenerateFullName()
@@ -72,5 +70,12 @@ public class PersonDataGenerator : IPersonDataGenerator
         return string.IsNullOrWhiteSpace(state)
             ? $"{placeResidence}, {street}, {building}, {apartment}"
             : $"{placeResidence}, {state}, {street}, {building}, {apartment}";
+    }
+
+    public string GeneratePhoneNumber()
+    {
+        var phoneNumber = _faker.Phone.PhoneNumber();
+
+        return $"{LanguageLocalizer.PhoneCode[_region]} {phoneNumber}";
     }
 }
