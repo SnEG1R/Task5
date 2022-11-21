@@ -50,11 +50,11 @@ public class PersonDataGenerator : IPersonDataGenerator
         var apartment = _faker.Address.SecondaryAddress();
 
         building = building
-            .Insert(0, $"{LanguageLocalizer.Houses[_region]} ");
+            .Insert(0, $"{RegionLocalizer.Houses[_region]} ");
 
         if (_random.Next(1, 3) == 1)
         {
-            placeResidence = _faker.Address.City();
+            placeResidence = $"{RegionLocalizer.Cities[_region]} {_faker.Address.City()}";
         }
         else
         {
@@ -65,6 +65,9 @@ public class PersonDataGenerator : IPersonDataGenerator
                 .Select(v => v.Name)
                 .ToList()
                 .ElementAt(_random.Next(countVillage));
+
+            placeResidence = placeResidence
+                .Insert(0, $"{RegionLocalizer.Villages[_region]} ");
         }
 
         return string.IsNullOrWhiteSpace(state)
@@ -76,6 +79,6 @@ public class PersonDataGenerator : IPersonDataGenerator
     {
         var phoneNumber = _faker.Phone.PhoneNumber();
 
-        return $"{LanguageLocalizer.PhoneCode[_region]} {phoneNumber}";
+        return $"{RegionLocalizer.PhoneCode[_region]} {phoneNumber}";
     }
 }

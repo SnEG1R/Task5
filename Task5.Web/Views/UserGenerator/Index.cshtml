@@ -49,6 +49,9 @@
 let slider = document.getElementById('customRange');
 let input = document.getElementById('input-error-value');
 
+tableContainer.addEventListener('scroll', async () => {
+    await checkPosition();
+});
 select.addEventListener('click',  async () => {
     await GetPersonData(true, 20);
 });
@@ -57,6 +60,10 @@ slider.addEventListener('change', async () => {
     await GetPersonData(true, 20);
 });
 input.addEventListener('change',  async () => {
+    if (input.value > 1000) {
+        input.value = 1000;
+    }
+    
     slider.value = input.value;
     await GetPersonData(true, 20);
 });

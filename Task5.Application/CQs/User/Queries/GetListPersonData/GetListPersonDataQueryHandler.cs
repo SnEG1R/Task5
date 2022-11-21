@@ -49,9 +49,9 @@ public class GetListPersonDataQueryHandler :
 
         var person = new PersonDto()
         {
-            FullName = lines[0],
-            Address = lines[1],
-            PhoneNumber = lines[2]
+            FullName = lines.Item1,
+            Address = lines.Item2,
+            PhoneNumber = lines.Item3
         };
 
         return Task.FromResult(person);
