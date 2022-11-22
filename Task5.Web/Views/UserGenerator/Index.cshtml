@@ -1,0 +1,70 @@
+﻿<link rel="stylesheet" href="css/user-generator/user-generator.css">
+
+<div>
+    <div class="header w-100 d-flex justify-content-center align-items-center" style="height: 120px">
+        <div class="block-region d-flex align-items-center flex-column">
+            <span>Region</span>
+            <select class="form-select" id="select">
+                <option value="en">English</option>
+                <option value="uk">Ukrainian</option>
+                <option value="pl">Polish</option>
+            </select>
+        </div>
+        <div class="block-range d-flex align-items-center flex-column">
+            <label for="customRange" class="form-label">
+                <span>Range error</span>
+            </label>
+            <input type="range" class="form-range" value="0" min="0" max="10" step="0.25" id="customRange">
+            <input type="number" min="0" max="1000" value="0" id="input-error-value">
+        </div>
+        <div class="block-range d-flex align-items-center flex-column">
+            <span>Seed</span>
+            <input type="number" min="0" max="1000" value="0" id="input-seed">
+            <button type="button" class="btn btn-danger mt-2 w-100 generate-seed">Generate</button>
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="table table-light table-striped" id="table">
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Random id</th>
+                <th>Full name</th>
+                <th>Address</th>
+                <th>Phone number</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <button onclick="tableToCSV()" type="button" class="btn btn-success mt-3">Export to CSV</button>
+</div>
+
+<script src="~/js/user-generator/sender.data.js"></script>
+<script src="~/js/user-generator/table.control.js"></script>
+<script src="~/js/user-generator/seed.control.js"></script>
+<script src="~/js/user-generator/table.csv.js"></script>
+<script>
+let slider = document.getElementById('customRange');
+let input = document.getElementById('input-error-value');
+
+tableContainer.addEventListener('scroll', async () => {
+    await checkPosition();
+});
+select.addEventListener('click',  async () => {
+    await GetPersonData(true, 20);
+});
+slider.addEventListener('change', async () => {
+    input.value = slider.value;
+    await GetPersonData(true, 20);
+});
+input.addEventListener('change',  async () => {
+    if (input.value > 1000) {
+        input.value = 1000;
+    }
+    
+    slider.value = input.value;
+    await GetPersonData(true, 20);
+});
+</script>

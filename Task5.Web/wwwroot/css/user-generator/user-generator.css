@@ -1,0 +1,52 @@
+.header {
+    margin-bottom: 10px;
+}
+
+.table-container {
+    height: 70vh;
+    overflow-x: hidden;
+}
+
+.table {
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.table-fixed thead {
+    width: 97%;
+}
+
+.table-fixed tbody {
+    height: 230px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+    display: block;
+}
+
+.table-fixed tbody td, .table-fixed thead > tr > th {
+    float: left;
+    border-bottom-width: 0;
+}
+
+.form-select {
+    width: auto !important;
+    height: auto !important;
+}
+
+.block-region, .block-range {
+    margin-right: 50px;
+}
+
+#input-customRange3, #input-seed {
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid black;
+}
+
+input[type=number] {
+    width: 150px;
+}

@@ -1,15 +1,31 @@
-var builder = WebApplication.CreateBuilder(args);
+using System.Net;
+using Task5.Application;
+using Task5.Persistence;
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
+
+builder.Services.AddControllersWithViews()
+    .AddRazorRuntimeCompilation()
+    .AddNewtonsoftJson();
+
+builder.Services.AddApplication();
+builder.Services.AddPersistence(configuration);
+
+builder.WebHost.ConfigureKestrel(config =>
+{
+    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+    {
+        config.Listen(IPAddress.Any, Convert.ToInt32(
+            Environment.GetEnvironmentVariable("PORT")));
+    }
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -22,6 +38,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=UserGenerator}/{action=Index}/{id?}");
 
 app.Run();
