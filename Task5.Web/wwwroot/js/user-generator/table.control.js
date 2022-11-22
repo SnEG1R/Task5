@@ -23,9 +23,10 @@ function setDataTable(response) {
 }
 
 function resetAll() {
-    $(tableBody).find('tr').remove();
-    counter = 1;
     tableContainer.scrollTo(0, 0);
+    counter = 1;
+
+    $(tableBody).find('tr').remove();
 }
 
 function htmlToTable(html, parent) {

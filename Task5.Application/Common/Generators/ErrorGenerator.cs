@@ -9,6 +9,7 @@ public class ErrorGenerator : IErrorGenerator
     private readonly double _errorValue;
     private readonly string _region;
     private readonly Random _random;
+    private const string SeparateSymbol = "<>";
 
     public ErrorGenerator(string region, int seed, double errorValue)
     {
@@ -20,25 +21,26 @@ public class ErrorGenerator : IErrorGenerator
     public (string, string, string) GenerateError(params string[] lines)
     {
         var (countError, probability) = GetCountErrorAndProbability();
-        int changeLineIndex;
 
         for (var i = 0; i < countError; i++)
-        {
-            changeLineIndex = _random.Next(0, lines.Length);
+            lines = ApplyChange(lines);
 
-            var operation = GetRandomOperation();
-            lines[changeLineIndex] = operation(lines[changeLineIndex]);
-        }
+        probability = probability.ToString().Length == 1 ? probability * 10 : probability;
 
-        if (_random.Next(1, 101) < probability * 100)
-        {
-            changeLineIndex = _random.Next(0, lines.Length);
-
-            var operation = GetRandomOperation();
-            lines[changeLineIndex] = operation(lines[changeLineIndex]);
-        }
+        if (_random.Next(1, 101) <= probability)
+            lines = ApplyChange(lines);
 
         return new ValueTuple<string, string, string>(lines[0], lines[1], lines[2]);
+    }
+
+    private string[] ApplyChange(string[] lines)
+    {
+        var randomIndex = _random.Next(lines.Length);
+        
+        var operation = GetRandomOperation();
+        lines[randomIndex] = operation(lines[randomIndex]);
+
+        return lines;
     }
 
     private string RemoveRandomChar(string line)
