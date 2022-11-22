@@ -9,6 +9,7 @@ let inputErrorValue = document.getElementById('input-error-value');
 
 window.onload = async function () {
     await GetPersonData(true, 20);
+    seedInput.value = +seedInput.value + 20;
 }
 
 async function GetPersonData(reset = false, countLoadRecord = 10) {

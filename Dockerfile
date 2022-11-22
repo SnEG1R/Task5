@@ -20,4 +20,4 @@ RUN dotnet publish "Task5.Web.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Task5.Web.dll"]
+CMD ["dotnet", "Task5.Web.dll"]

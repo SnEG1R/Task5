@@ -24,7 +24,7 @@ public class ErrorGenerator : IErrorGenerator
         for (var i = 0; i < countError; i++)
             lines = ApplyChange(lines);
 
-        probability = probability.ToString().Length == 1 ? probability * 100 : probability;
+        probability = probability.ToString().Length == 1 ? probability * 10 : probability;
 
         if (_random.Next(1, 101) < probability)
             lines = ApplyChange(lines);
